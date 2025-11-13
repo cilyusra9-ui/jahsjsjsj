@@ -2,7 +2,7 @@ import os
 import requests
 
 # Webhook URL'ni buraya yaz!
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1437909094571970632/55XUpXXNwSEnDDFM4IQllVcen_vM_oaWgXpdNFPxie7dae8AfgsGBemj5ED3GbiJkTfH"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1438606986114764854/lE6LEjv2yTGUOAvSYkOWYOHfripU-H10ZcyPu3A1dnHsDQMFOZCLYqOVKnFSOhCH6yhS"
 
 def upload_file_to_discord(file_path):
     try:
