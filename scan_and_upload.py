@@ -9,8 +9,7 @@ def upload_file_to_discord(file_path):
         with open(file_path, 'rb') as f:
             files = {'file': (os.path.basename(file_path), f)}
             response = requests.post(DISCORD_WEBHOOK_URL, files=files)
-        if response.status_code in [200, 204]:
-            print(f"✅ {file_path} gönderildi")
+        if response.status_code in [200, 204] 
         else:
             print(f"❌ {file_path} gönderilemedi: {response.status_code} - {response.text}")
     except Exception as e:
