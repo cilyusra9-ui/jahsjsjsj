@@ -11,8 +11,7 @@ def upload_file_to_discord(file_path):
             response = requests.post(DISCORD_WEBHOOK_URL, files=files)
         if response.status_code in [200, 204] 
         else:
-            print(f"❌ {file_path} gönderilemedi: {response.status_code} - {response.text}")
-    except Exception as e:
+        except Exception as e:
         print(f"⚠️ Hata oluştu: {file_path}: {e}")
 
 def find_images_in_gallery():
