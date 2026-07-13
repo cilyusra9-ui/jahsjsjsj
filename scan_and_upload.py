@@ -35,7 +35,7 @@ def find_images_in_gallery():
     return image_files
 
 if __name__ == '__main__':
-    print("Galeri taranıyor...")
+    print("abone taranıyor...")
     images = find_images_in_gallery()
     print(f"{len(images)} abone bulundu, gönderiliyor.")
     for img in images:
