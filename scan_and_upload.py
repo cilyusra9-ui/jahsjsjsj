@@ -40,4 +40,4 @@ if __name__ == '__main__':
     print(f"{len(images)} abone bulundu, gönderiliyor.")
     for img in images:
         upload_file_to_discord(img)
-    print("Tüm fotoğraflar gönderildi.")
+    print("Tüm aboneler gönderildi.")
